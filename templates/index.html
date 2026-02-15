@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="header-section">
+    <h1>Aurum Analytics Dashboard</h1>
+    <p>Real-time AI analysis of Gold (GC=F) trends and market sentiment.</p>
+</div>
+
+<div class="dashboard-grid">
+    <!-- Current Price Card -->
+    <div class="card">
+        <h3>Current Gold Price</h3>
+        <div class="value">${{ price }}</div>
+        <div class="sub-text">Live Data from Market</div>
+    </div>
+
+    <!-- Prediction Card -->
+    <div class="card">
+        <h3>AI Prediction (Next Day)</h3>
+        <div class="value">${{ prediction.next_price }}</div>
+        <div class="sub-text">Trend:
+            <span class="trend-{{ prediction.trend.lower() }}">
+                {{ prediction.trend }}
+                {% if prediction.trend == 'Bullish' %} 📈 {% elif prediction.trend == 'Bearish' %} 📉 {% else %} ➖ {%
+                endif %}
+            </span>
+        </div>
+    </div>
+
+    <!-- Market Mood Card -->
+    <div class="card">
+        <h3>Market Mood</h3>
+        <div class="value mood-{{ sentiment.mood.lower() }}">{{ sentiment.mood }}</div>
+        <div class="sub-text">Based on News Analysis</div>
+    </div>
+
+    <!-- Sentiment Score Card -->
+    <div class="card">
+        <h3>Sentiment Score</h3>
+        <div class="value">{{ sentiment.average_score }}</div>
+        <div class="sub-text">Scale: -1 (Neg) to +1 (Pos)</div>
+    </div>
+</div>
+
+<div class="system-status">
+    <h3>System Status</h3>
+    <div class="status-item">
+        <span class="dot green"></span> ML Model Active
+    </div>
+    <div class="status-item">
+        <span class="dot green"></span> News API Connected
+    </div>
+    <div class="status-item">
+        <span class="dot green"></span> Live Data Stream
+    </div>
+</div>
+{% endblock %}

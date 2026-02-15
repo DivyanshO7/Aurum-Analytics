@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="header-section">
+    <h1>Interactive Market Charts</h1>
+    <p>Historical price data and AI trend projection.</p>
+</div>
+
+<div class="chart-container">
+    <canvas id="goldChart"></canvas>
+</div>
+
+<div class="chart-controls">
+    <button onclick="updateChart('1m')">1 Month</button>
+    <button onclick="updateChart('3m')">3 Months</button>
+    <button onclick="updateChart('1y')" class="active">1 Year</button>
+</div>
+{% endblock %}

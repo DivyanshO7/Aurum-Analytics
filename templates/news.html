@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="header-section">
+    <h1>News Sentiment Analysis</h1>
+    <p>Latest financial headlines analyzed by NLP.</p>
+</div>
+
+<div class="news-list">
+    {% for article in news %}
+    <div class="news-item border-{{ article.label.lower() }}">
+        <div class="news-header">
+            <span class="news-source">{{ article.source }}</span>
+            <span class="badge badge-{{ article.label.lower() }}">{{ article.label }}</span>
+        </div>
+        <h3 class="news-title"><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></h3>
+        <div class="news-stats">
+            Sentiment Score: <strong>{{ article.score }}</strong>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

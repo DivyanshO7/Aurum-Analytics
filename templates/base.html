@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurum Analytics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">Aurum Analytics 🪙</div>
+        <ul class="nav-links">
+            <li><a href="/" class="{{ 'active' if page == 'home' else '' }}">Dashboard</a></li>
+            <li><a href="/news" class="{{ 'active' if page == 'news' else '' }}">News Analysis</a></li>
+            <li><a href="/chart" class="{{ 'active' if page == 'chart' else '' }}">Interactive Charts</a></li>
+            <li><a href="/prediction" class="{{ 'active' if page == 'prediction' else '' }}">AI Prediction</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Aurum Analytics</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>
