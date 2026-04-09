@@ -1,6 +1,7 @@
 import requests
 from textblob import TextBlob
 import random
+import os
 
 _last_target_score = None
 _manual_refresh_count = 0
@@ -19,7 +20,7 @@ def get_news_sentiment(force_refresh=False):
     # NOTE: You would typically get this from an environment variable
     # For this academic project, we will use a demo key or fallback if it fails.
     # Replace 'YOUR_NEWSAPI_KEY' with a real key to fetch live data.
-    API_KEY = "425ac000aa1846f1a20e050203aafe9c" 
+    API_KEY = os.environ.get("NEWSAPI_KEY", "YOUR_NEWSAPI_KEY") 
     
     url = f"https://newsapi.org/v2/everything?q=gold+price+market&language=en&sortBy=publishedAt&apiKey={API_KEY}"
     
