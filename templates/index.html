@@ -21,7 +21,7 @@
         <div class="sub-text">Trend:
             <span class="trend-{{ prediction.trend.lower() }}">
                 {{ prediction.trend }}
-                {% if prediction.trend == 'Bullish' %} 📈 {% elif prediction.trend == 'Bearish' %} 📉 {% else %} ➖ {%
+                {% if prediction.trend == 'Bullish' %} ▲ {% elif prediction.trend == 'Bearish' %} ▼ {% else %} — {%
                 endif %}
             </span>
         </div>

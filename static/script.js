@@ -33,29 +33,82 @@ function initChart(ctx) {
                     datasets: [{
                         label: 'Gold Price (USD)',
                         data: prices,
-                        borderColor: '#facc15',
-                        backgroundColor: 'rgba(250, 204, 21, 0.1)',
-                        borderWidth: 2,
+                        borderColor: '#F0B429',
+                        backgroundColor: 'rgba(240, 180, 41, 0.05)',
+                        borderWidth: 1.5,
                         tension: 0.1,
                         fill: true,
-                        pointRadius: 0
+                        pointRadius: 0,
+                        pointHoverRadius: 4,
+                        pointHoverBackgroundColor: '#F0B429',
+                        pointHoverBorderColor: '#0D1117',
+                        pointHoverBorderWidth: 2
                     }]
                 },
                 options: {
                     responsive: true,
                     plugins: {
                         legend: {
-                            labels: { color: '#94a3b8' }
+                            labels: {
+                                color: '#8B949E',
+                                font: {
+                                    family: 'Inter',
+                                    size: 12,
+                                    weight: '500'
+                                }
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: '#1C2128',
+                            titleColor: '#E6EDF3',
+                            bodyColor: '#F0B429',
+                            borderColor: '#30363D',
+                            borderWidth: 1,
+                            titleFont: {
+                                family: 'Inter',
+                                size: 12,
+                                weight: '500'
+                            },
+                            bodyFont: {
+                                family: 'Inter',
+                                size: 14,
+                                weight: '700'
+                            },
+                            padding: 12,
+                            cornerRadius: 8,
+                            displayColors: false
                         }
                     },
                     scales: {
                         x: {
-                            ticks: { color: '#94a3b8' },
-                            grid: { color: '#334155' }
+                            ticks: {
+                                color: '#484F58',
+                                font: {
+                                    family: 'Inter',
+                                    size: 11
+                                },
+                                maxTicksLimit: 12
+                            },
+                            grid: {
+                                color: '#21262D',
+                                drawBorder: false
+                            }
                         },
                         y: {
-                            ticks: { color: '#94a3b8' },
-                            grid: { color: '#334155' }
+                            ticks: {
+                                color: '#484F58',
+                                font: {
+                                    family: 'Inter',
+                                    size: 11
+                                },
+                                callback: function(value) {
+                                    return '$' + value.toLocaleString();
+                                }
+                            },
+                            grid: {
+                                color: '#21262D',
+                                drawBorder: false
+                            }
                         }
                     },
                     interaction: {
