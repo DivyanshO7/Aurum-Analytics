@@ -19,6 +19,12 @@
             <li><a href="/news" class="{{ 'active' if page == 'news' else '' }}">News Analysis</a></li>
             <li><a href="/chart" class="{{ 'active' if page == 'chart' else '' }}">Interactive Charts</a></li>
             <li><a href="/prediction" class="{{ 'active' if page == 'prediction' else '' }}">AI Prediction</a></li>
+            <li>
+                <form action="/refresh" method="POST" style="margin: 0; display: inline-flex; align-items: center;">
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                    <button type="submit" style="background: rgba(255, 215, 0, 0.2); color: #ffd700; border: 1px solid #ffd700; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: 600; font-family: inherit; transition: all 0.2s; margin-left: 10px;">Live Refresh 🔄</button>
+                </form>
+            </li>
         </ul>
     </nav>
 

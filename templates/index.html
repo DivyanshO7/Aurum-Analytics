@@ -47,11 +47,13 @@
     <div class="status-item">
         <span class="dot green"></span> ML Model Active
     </div>
+    {% if system_status.news == 'Connected' %}
     <div class="status-item">
-        <span class="dot green"></span> News API Connected
+        <span class="dot green"></span> News API: {{ system_status.news }}
     </div>
+    {% endif %}
     <div class="status-item">
-        <span class="dot green"></span> Live Data Stream
+        <span class="dot {% if system_status.gold == 'Connected' %}green{% else %}red{% endif %}"></span> Live Data: {{ system_status.gold }}
     </div>
 </div>
 {% endblock %}

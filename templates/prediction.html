@@ -25,12 +25,12 @@
                         <td>{{ prediction.future_dates[i] }}</td>
                         <td>${{ prediction.future_prices[i] }}</td>
                         <td>
-                            {% if prediction.slope > 0 %}
+                            {% if prediction.daily_trends[i] == 'Bullish' %}
                             <span class="trend-bullish">Bullish 🔼</span>
-                            {% elif prediction.slope < 0 %} <span class="trend-bearish">Bearish 🔽</span>
-                                {% else %}
+                            {% elif prediction.daily_trends[i] == 'Bearish' %} <span class="trend-bearish">Bearish 🔽</span>
+                            {% else %}
                                 <span class="trend-neutral">Stable ➖</span>
-                                {% endif %}
+                            {% endif %}
                         </td>
                     </tr>
                     {% endfor %}
@@ -45,16 +45,29 @@
             The market sentiment is currently <strong>{{ sentiment.mood }}</strong> with an average score of <strong>{{
                 sentiment.average_score }}</strong>.
 
-            {% if sentiment.mood == 'Bullish' and prediction.trend == 'Bullish' %}
-            Both technical indicators and news sentiment align for a <span class="highlight-green">Strong Buy</span>
-            signal.
+            {% if (sentiment.mood == 'Bullish' and prediction.trend == 'Neutral') or (sentiment.mood == 'Neutral' and prediction.trend == 'Bullish') %}
+            Trending positive. Favorable indicator for a <span class="highlight-green">Buy</span> signal.
+            {% elif sentiment.mood == 'Bullish' and prediction.trend == 'Bullish' %}
+            Both technical indicators and news sentiment align for a <span class="highlight-green">Strong Buy</span> signal.
+            {% elif (sentiment.mood == 'Bearish' and prediction.trend == 'Neutral') or (sentiment.mood == 'Neutral' and prediction.trend == 'Bearish') %}
+            Trending negative. Cautious indicator for a <span class="highlight-red">Sell</span> signal.
             {% elif sentiment.mood == 'Bearish' and prediction.trend == 'Bearish' %}
-            Negative sentiment and downward technical trends suggest a <span class="highlight-red">Strong Sell</span>
-            signal.
+            Negative sentiment and downward technical trends suggest a <span class="highlight-red">Strong Sell</span> signal.
             {% else %}
-            Mixed signals detected. Volatility may be high. Recommended to <span class="highlight-yellow">Hold</span>
-            until trend confirms.
+            Mixed signals detected. Volatility may be high. Recommended to <span class="highlight-yellow">Hold</span> until trend confirms.
             {% endif %}
+        </p>
+    </div>
+    
+    <div class="ai-analysis-box" style="margin-top: 20px;">
+        <h3>Fusion Model Breakdown (Next 24h) 📊</h3>
+        <ul style="list-style-type: none; padding: 15px 0 0 0; text-align: left; line-height: 1.8;">
+            <li><strong>Base Graph Drift:</strong> <span style="float: right;">{% if prediction.breakdown.graph_base_change > 0 %}+{% endif %}${{ prediction.breakdown.graph_base_change }}</span></li>
+            <li><strong>News Sentiment Impact:</strong> <span style="float: right;">{% if prediction.breakdown.news_impact_change > 0 %}+{% endif %}${{ prediction.breakdown.news_impact_change }}</span></li>
+            <li style="border-top: 1px solid #333; margin-top: 10px; padding-top: 10px; color: #ffd700;"><strong>Effective Net Expected Change:</strong> <strong style="float: right;">{% if prediction.breakdown.net_change_day_1 > 0 %}+{% endif %}${{ prediction.breakdown.net_change_day_1 }}</strong></li>
+        </ul>
+        <p style="font-size: 0.85em; color: #aaa; margin-top: 15px; border-top: 1px solid #222; padding-top: 10px;">
+            The model tethers historical timeline momentum (regression slope computed against today's absolute spot price) with NLP text sentiment weighted strictly against standard deviation asset volatility.
         </p>
     </div>
 

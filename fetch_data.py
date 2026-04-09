@@ -36,6 +36,17 @@ def get_gold_data(period='1y'):
         # Sort by Date
         df.sort_values('Date', inplace=True)
         
+        # Grab live intraday quote to align with exact real-world website values
+        try:
+            live_price = float(yf.Ticker(ticker).fast_info['lastPrice'])
+            if df['Date'].iloc[-1].date() < datetime.now().date():
+                new_row = pd.DataFrame({'Date': [pd.to_datetime(datetime.now().date())], 'Price': [live_price]})
+                df = pd.concat([df, new_row], ignore_index=True)
+            else:
+                df.loc[df.index[-1], 'Price'] = live_price
+        except Exception as e:
+            print(f"Failed to append live price: {e}")
+            
         return df
 
     except Exception as e:
